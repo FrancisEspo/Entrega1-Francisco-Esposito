@@ -1,13 +1,21 @@
-from django.shortcuts import render
+from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
-from app_coder.models import Curso
+#from app_coder.models import Curso, Profesor, Estudiante, Entregable
 from django.template import loader
 
 # Create your views here.
-def curso(self):
-    curso = Curso(nombre = "django", camada = "1345")
-    curso.save()
 
-    documento = f"El curso es: {curso.nombre}, de la camada: {curso.camada}"
+def inicio(request):
+    return render(request, 'app_coder/inicio.html')
 
-    return HttpResponse(documento)
+def Curso(request):
+    return render(request, 'app_coder/cursos.html')
+
+def Entregable(request):
+    return render(request, 'app_coder/entregables.html')
+
+def Estudiante(request):
+    return render(request, 'app_coder/estudiantes.html')
+
+def Profesor(request):
+    return render(request, 'app_coder/profesores.html')
