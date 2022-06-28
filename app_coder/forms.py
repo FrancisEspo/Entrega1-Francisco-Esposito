@@ -19,5 +19,5 @@ class profesor_formulario(forms.Form):
 
 class entregable_formulario(forms.Form):
     nombre = forms.CharField(max_length=30)
-    fecha_de_entrega = forms.DateField()
+    fecha_de_entrega = forms.DateField(help_text="Año-Mes-Día")
     entregado = forms.BooleanField(required=False, initial=False)

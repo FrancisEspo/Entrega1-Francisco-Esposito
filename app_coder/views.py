@@ -107,3 +107,17 @@ def profesor(request):
         mi_formulario = profesor_formulario()  # Formulario vacio para construir el HTML
 
     return render(request, "app_coder/profesores.html", {"mi_formulario": mi_formulario})
+
+def buscar(request):
+    if request.GET['camada']:
+
+        camada = request.GET['camada']
+        print(camada)
+        cursos = Curso.objects.filter(camada__icontains=camada)
+        print(cursos)
+        return render(request, 'app_coder/inicio.html', {'cursos':cursos, 'camada':camada})
+    
+    else:
+        respuesta = "No hay datos ingresados"
+    
+    return render(request, 'app_coder/inicio.html', {'respuesta':respuesta})

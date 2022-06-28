@@ -3,9 +3,28 @@
 {% load static %}
 
 {% block contenido %}
-<div>
-    <h1>Este es el titulo de inicio</h1>
 
-    <p>Inicio iniciado en el iniciador</p>
+<div>
+    <br>
+    <form action="/app_coder/buscar/" method="get">
+        
+        <input type="number" name="camada" id="camada" placeholder="Numero de la camada">
+        <input type="submit" value="Buscar curso">
+
+    </form>
+    <br>
+</div>
+
+<div>
+{% if cursos %}
+ <p>Estamos buscando el: {{camada}}</p>
+ <ul>
+    {% for curso in cursos %}
+    <li>Nombre del curso: {{curso.nombre}}</li>
+    <li>Camada: {{curso.camada}}</li>
+    <br>
+    {% endfor %}
+ </ul>
+{% endif %}
 </div>
 {% endblock %}
