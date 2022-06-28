@@ -1,10 +1,9 @@
 from distutils.log import info
-import email
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
-from app_coder.models import Curso, Entregable, Estudiante, Profesor
+from app_coder.models import Curso, Estudiante, Profesor
 
-from .forms import curso_formulario, profesor_formulario, entregable_formulario, estudiante_formulario
+from .forms import curso_formulario, profesor_formulario, estudiante_formulario
 
 # Create your views here.
 
@@ -34,33 +33,6 @@ def curso(request):
         mi_formulario = curso_formulario()  # Formulario vacio para construir el HTML
 
     return render(request, "app_coder/cursos.html", {"mi_formulario": mi_formulario})
-
-
-def entregable(request):
-    if request.method == 'POST':
-
-        mi_formulario = entregable_formulario(request.POST)
-
-        if mi_formulario.is_valid():
-
-            informacion = mi_formulario.cleaned_data
-
-            print(informacion)
-
-            entregable = Entregable(
-                nombre=informacion['nombre'], fecha_de_entrega=informacion['fecha_de_entrega'], entregado=['entregado'])
-
-            entregable.save()
-
-            # Volver a cargar formulario
-            return render(request, "app_coder/inicio.html")
-    else:
-
-        # Formulario vacio para construir el HTML
-        mi_formulario = entregable_formulario()
-
-    return render(request, "app_coder/entregables.html", {"mi_formulario": mi_formulario})
-
 
 def estudiante(request):
     if request.method == 'POST':
