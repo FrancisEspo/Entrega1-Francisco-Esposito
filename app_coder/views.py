@@ -7,10 +7,8 @@ from .forms import curso_formulario, profesor_formulario, estudiante_formulario
 
 # Create your views here.
 
-
 def inicio(request):
     return render(request, 'app_coder/inicio.html')
-
 
 def curso(request):
     if request.method == 'POST':
@@ -56,7 +54,6 @@ def estudiante(request):
         mi_formulario = estudiante_formulario()
 
     return render(request, "app_coder/estudiantes.html", {"mi_formulario": mi_formulario})
-
 
 def profesor(request):
     if request.method == 'POST':
