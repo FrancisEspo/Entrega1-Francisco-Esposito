@@ -3,12 +3,23 @@
 {% load static %}
 
 {% block contenido %}
+
+{% if mi_formulario.errors %}
+
+<p style="color: red">Están mal los datos, revisar por favor</p>
+
+{% endif %}
+
 <div>
-    <h1 style="color: red">entrega tus desafios ahora</h1>
+    <form action="" method="POST">{% csrf_token %} <!-- Token de validacion form -->
+ 
+        <table> 
 
-    <p style="color: violet">no sabe no responde</p>
+            {{ mi_formulario.as_table }}
 
-    <p style="color: violet">no sabe no responde</p>
-    <p>no sabe no responde</p>
-</div>
+        </table>
+ 
+        <input type="submit" value="Agregar entregable">
+    </form>
+ </div>
 {% endblock %}

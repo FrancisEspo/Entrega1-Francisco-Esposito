@@ -4,9 +4,22 @@
 
 {% block contenido %}
 
-<div>
-    <h1>pero ahora estoy heredando de index.html pero sigo estando en profesores</h1>
+{% if mi_formulario.errors %}
 
-    <p>lo que dice el de arriba</p>
-</div>
+<p style="color: red">Están mal los datos, revisar por favor</p>
+
+{% endif %}
+
+<div>
+    <form action="" method="POST">{% csrf_token %} <!-- Token de validacion form -->
+ 
+        <table> 
+
+            {{ mi_formulario.as_table }}
+
+        </table>
+ 
+        <input type="submit" value="Agregar profesor">
+    </form>
+ </div>
 {% endblock %}

@@ -4,12 +4,22 @@
 
 {% block contenido %}
 
+{% if mi_formulario.errors %}
+
+<p style="color: red">Están mal los datos, revisar por favor</p>
+
+{% endif %}
+
 <div>
-    <h1 style="color: green">somos estudiantes</h1>
+    <form action="" method="POST">{% csrf_token %} <!-- Token de validacion form -->
+ 
+        <table> 
 
-    <p>ESTUDIANTES</p>
+            {{ mi_formulario.as_table }}
 
-    <p>ESTUDIANTES</p>
-    <p>ESTUDIANTES</p>
-</div>
+        </table>
+ 
+        <input type="submit" value="Agregar estudiante">
+    </form>
+ </div>
 {% endblock %}

@@ -3,12 +3,23 @@
 {% load static %}
 
 {% block contenido %}
+
+{% if mi_formulario.errors %}
+
+<p style="color: red">Están mal los datos, revisar por favor</p>
+
+{% endif %}
+
 <div>
-    <h1 style="color: green">cursos de python gratis</h1>
+    <form action="" method="POST">{% csrf_token %} <!-- Token de validacion form -->
+ 
+        <table> 
 
-    <p>python</p>
+            {{ mi_formulario.as_table }}
 
-    <p>django</p>
-    <p>github</p>
-</div>
+        </table>
+ 
+        <input type="submit" value="Agregar curso :)">
+    </form>
+ </div>
 {% endblock %}
