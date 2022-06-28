@@ -10,7 +10,7 @@
 Trabajo práctico realizado para practicar las metodologias de desarrollo MVT y ABM en Base de Datos. 
 La pagina web consiste en un Inicio el cual le permite buscar cursos registrados en la base de datos a partir del numero de la camada. Así mismo se posee un header para navegar en la distintas vistas para la creación de nuevos registros en los modelos.
 ### Screenshot
-![Pagina de Inicio](https://github.com/FrancisEspo/Proyecto_Coder/blob/0cfb64725a11fe3b5536930dd9236c282fed80af/app_coder/static/app_coder/assets/img/Inicio.png)
+![Pagina de Inicio](https://github.com/FrancisEspo/Proyecto_Coder/blob/88fcbf57e91f00b8b5936101eed65e2661f2db3e/app_coder/static/app_coder/assets/img/Inicio.png)
 ## Models
 ***
 Curso
