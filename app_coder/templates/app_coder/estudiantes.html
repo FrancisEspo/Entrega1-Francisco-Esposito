@@ -9,7 +9,7 @@
 <p style="color: red">Están mal los datos, revisar por favor</p>
 
 {% endif %}
-
+<br>
 <div>
     <form action="" method="POST">{% csrf_token %} <!-- Token de validacion form -->
  
@@ -18,8 +18,15 @@
             {{ mi_formulario.as_table }}
 
         </table>
- 
-        <input type="submit" value="Agregar estudiante">
+        <br>
+        <input class="btn-success" type="submit" value="Agregar estudiante">
     </form>
  </div>
+
+ <br>
+ <div>
+    <a class="btn-outline-secondary" href="{% url 'get_estudiante' %}">Ver todos los estudiantes</a>
+ </div>
+ <br>
+
 {% endblock %}

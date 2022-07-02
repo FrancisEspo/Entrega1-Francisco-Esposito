@@ -1,0 +1,18 @@
+{% extends "app_coder/index.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<body>
+    <div>
+        {% for e in estudiantes %}
+            <br>
+            <li>{{e}}</li>
+
+        {% endfor %}
+        <br>
+    </div>
+</body>
+
+{% endblock %}

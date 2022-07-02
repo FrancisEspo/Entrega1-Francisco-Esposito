@@ -90,3 +90,24 @@ def buscar(request):
         respuesta = "No hay datos ingresados"
     
     return render(request, 'app_coder/inicio.html', {'respuesta':respuesta})
+
+def get_profesor(request):
+    profesores = Profesor.objects.all() 
+
+    contexto = {'profesores': profesores}
+
+    return render(request, 'app_coder\getters\get_profesor.html', contexto)
+
+def get_estudiante(request):
+    estudiantes = Estudiante.objects.all() 
+
+    contexto = {'estudiantes': estudiantes}
+
+    return render(request, 'app_coder\getters\get_estudiante.html', contexto)
+
+def get_curso(request):
+    cursos = Curso.objects.all() 
+
+    contexto = {'cursos': cursos}
+
+    return render(request, 'app_coder\getters\get_curso.html', contexto)

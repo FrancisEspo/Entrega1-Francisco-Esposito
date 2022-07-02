@@ -1,8 +1,6 @@
 from django import forms
 
 class curso_formulario(forms.Form):
-
-    #Especificar los campos
     curso = forms.CharField(max_length=40)
     camada = forms.IntegerField()
 
