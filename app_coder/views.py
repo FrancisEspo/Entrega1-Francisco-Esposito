@@ -16,6 +16,7 @@ from .forms import curso_formulario, profesor_formulario, estudiante_formulario
 def inicio(request):
     return render(request, 'app_coder/inicio.html')
 
+#Buscador de cursos
 def buscar(request):
     if request.GET['camada']:
 
@@ -31,6 +32,7 @@ def buscar(request):
     return render(request, 'app_coder/inicio.html', {'respuesta':respuesta})
 
 #Creadores de registros
+
 def curso(request):
     if request.method == 'POST':
 
