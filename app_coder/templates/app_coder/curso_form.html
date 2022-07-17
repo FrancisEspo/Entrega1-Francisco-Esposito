@@ -4,28 +4,29 @@
 
 {% block contenido %}
 
-{% if mi_formulario.errors %}
+{% if form.errors %}
 
 <p style="color: red">Están mal los datos, revisar por favor</p>
 
 {% endif %}
 <br>
 <div>
+    <p>Este es curso_form</p>
     <form action="" method="POST">{% csrf_token %} <!-- Token de validacion form -->
  
         <table> 
 
-            {{ mi_formulario.as_table }}
+            {{ form.as_p }}
 
         </table>
         <br>
-        <input class="btn-success" type="submit" value="Agregar estudiante">
+        <input class="btn-success" type="submit" value="Editar">
     </form>
  </div>
 
  <br>
  <div>
-    <a class="btn-outline-secondary" href="{% url 'estudiante_list' %}">Ver todos los estudiantes</a>
+    <a class="btn-outline-secondary" href="{% url 'curso_list' %}">Volver</a>
  </div>
  <br>
 

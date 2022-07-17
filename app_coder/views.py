@@ -1,6 +1,12 @@
+from audioop import reverse
 from distutils.log import info
+from re import template
 from django.shortcuts import render, HttpResponse
 from django.http import HttpResponse
+from django.urls import reverse_lazy
+
+from django.views.generic import ListView, DeleteView, DetailView, CreateView, UpdateView
+
 from app_coder.models import Curso, Estudiante, Profesor
 
 from .forms import curso_formulario, profesor_formulario, estudiante_formulario
@@ -10,6 +16,21 @@ from .forms import curso_formulario, profesor_formulario, estudiante_formulario
 def inicio(request):
     return render(request, 'app_coder/inicio.html')
 
+def buscar(request):
+    if request.GET['camada']:
+
+        camada = request.GET['camada']
+        print(camada)
+        cursos = Curso.objects.filter(camada__icontains=camada)
+        print(cursos)
+        return render(request, 'app_coder/inicio.html', {'cursos':cursos, 'camada':camada})
+    
+    else:
+        respuesta = "No hay datos ingresados"
+    
+    return render(request, 'app_coder/inicio.html', {'respuesta':respuesta})
+
+#Creadores de registros
 def curso(request):
     if request.method == 'POST':
 
@@ -77,37 +98,61 @@ def profesor(request):
 
     return render(request, "app_coder/profesores.html", {"mi_formulario": mi_formulario})
 
-def buscar(request):
-    if request.GET['camada']:
+#Lists
 
-        camada = request.GET['camada']
-        print(camada)
-        cursos = Curso.objects.filter(camada__icontains=camada)
-        print(cursos)
-        return render(request, 'app_coder/inicio.html', {'cursos':cursos, 'camada':camada})
-    
-    else:
-        respuesta = "No hay datos ingresados"
-    
-    return render(request, 'app_coder/inicio.html', {'respuesta':respuesta})
+class curso_list(ListView):
+    model = Curso
+    template_name = "app_coder/lists/curso_list.html"
 
-def get_profesor(request):
-    profesores = Profesor.objects.all() 
+class estudiante_list(ListView):
+    model = Estudiante
+    template_name = "app_coder/lists/estudiante_list.html"
 
-    contexto = {'profesores': profesores}
+class profesor_list(ListView):
+    model = Profesor
+    template_name = "app_coder/lists/profesor_list.html"
 
-    return render(request, 'app_coder\getters\get_profesor.html', contexto)
+#Details
 
-def get_estudiante(request):
-    estudiantes = Estudiante.objects.all() 
+class curso_detail(DetailView):
+    model = Curso
+    template_name = 'app_coder/details/curso_detail.html'
 
-    contexto = {'estudiantes': estudiantes}
+class estudiante_detail(DetailView):
+    model = Estudiante
+    template_name = 'app_coder/details/estudiante_detail.html'
 
-    return render(request, 'app_coder\getters\get_estudiante.html', contexto)
+class profesor_detail(DetailView):
+    model = Profesor
+    template_name = 'app_coder/details/profesor_detail.html'
 
-def get_curso(request):
-    cursos = Curso.objects.all() 
+#Updates
 
-    contexto = {'cursos': cursos}
+class curso_update(UpdateView):
+    model =  Curso
+    success_url = reverse_lazy('curso_list')
+    fields = ['nombre', 'camada']
 
-    return render(request, 'app_coder\getters\get_curso.html', contexto)
+class estudiante_update(UpdateView):
+    model =  Estudiante
+    success_url = reverse_lazy('estudiante_list')
+    fields = ['nombre', 'apellido', 'email']
+
+class profesor_update(UpdateView):
+    model =  Profesor
+    success_url = reverse_lazy('profesor_list')
+    fields = ['nombre', 'apellido', 'email', 'profesion']
+
+#Deleters
+
+class curso_delete(DeleteView):
+    model = Curso
+    success_url = reverse_lazy('curso_list')
+
+class estudiante_delete(DeleteView):
+    model = Estudiante
+    success_url = reverse_lazy('estudiante_list')
+
+class profesor_delete(DeleteView):
+    model = Profesor
+    success_url = reverse_lazy('profesor_list')

@@ -1,0 +1,25 @@
+{% extends "app_coder/index.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<body>
+
+    <h1>Detalle de los profesores de Coder</h1>
+    
+    <div>
+        <p>Nombre: <i> {{ profesor.nombre }} </i></p>
+        <p>Apellido: <i> {{ profesor.apellido }} </i></p>
+        <p>Email: <i> {{ profesor.email }} </i></p>
+        <p>Profesion: <i> {{ profesor.email }} </i></p>
+        <br>
+        <p><a href=" {% url 'profesor_list' %} "></a></p>
+    </div>
+    <div>
+        <a class="btn-outline-secondary" href="{% url 'profesor_list' %}">Volver</a>
+     </div>
+     <br>
+</body>
+
+{% endblock %}

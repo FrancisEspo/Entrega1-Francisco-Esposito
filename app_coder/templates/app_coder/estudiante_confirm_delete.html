@@ -1,0 +1,17 @@
+{% extends "app_coder/index.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<body>
+    <title>Estudiante Borrar</title>
+    <div>
+        <form method="post">{% csrf_token %}
+            ¿Estás seguro que deseas borrar el estudiante "{{ object }}"?
+            <input type="submit" value="Borrar" />
+        </form>
+    </div>
+</body>
+
+{% endblock %}

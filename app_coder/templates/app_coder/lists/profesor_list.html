@@ -1,0 +1,27 @@
+{% extends "app_coder/index.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<body>
+
+    <h1>Profesores de Coder</h1>
+    
+    <div>
+        <ul>
+            {% for profesor in object_list %}
+                <li>
+                    <p>NOMBRE: {{ profesor.nombre }}</p>
+                    <p>
+                        <a href=" {% url 'profesor_detail' profesor.id %} ">Ver</a>
+                        <a href=" {% url 'profesor_update' profesor.id %} ">Editar</a>
+                        <a href=" {% url 'profesor_delete' profesor.id %} ">Borrar</a> 
+                    </p>
+                </li>
+            {% endfor %}
+        </ul>
+    </div>
+</body>
+
+{% endblock %}

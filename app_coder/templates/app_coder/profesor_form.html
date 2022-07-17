@@ -4,7 +4,7 @@
 
 {% block contenido %}
 
-{% if mi_formulario.errors %}
+{% if form.errors %}
 
 <p style="color: red">Están mal los datos, revisar por favor</p>
 
@@ -15,17 +15,17 @@
  
         <table> 
 
-            {{ mi_formulario.as_table }}
+            {{ form.as_p }}
 
         </table>
         <br>
-        <input class="btn-success" type="submit" value="Agregar estudiante">
+        <input class="btn-success" type="submit" value="Editar">
     </form>
  </div>
 
  <br>
  <div>
-    <a class="btn-outline-secondary" href="{% url 'estudiante_list' %}">Ver todos los estudiantes</a>
+    <a class="btn-outline-secondary" href="{% url 'profesor_list' %}">Volver</a>
  </div>
  <br>
 

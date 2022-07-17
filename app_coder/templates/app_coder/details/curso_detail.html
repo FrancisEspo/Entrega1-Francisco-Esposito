@@ -1,0 +1,23 @@
+{% extends "app_coder/index.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<body>
+
+    <h1>Detalle de los cursos de Coder</h1>
+    
+    <div>
+        <p>Nombre del curso: <i> {{ curso.nombre }} </i></p>
+        <p>Camada: <i> {{ curso.camada }} </i></p>
+        <br>
+        <p><a href=" {% url 'curso_list' %} "></a></p>
+    </div>
+    <div>
+        <a class="btn-outline-secondary" href="{% url 'curso_list' %}">Volver</a>
+     </div>
+     <br>
+</body>
+
+{% endblock %}
