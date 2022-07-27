@@ -3,28 +3,36 @@
 {% load static %}
 
 {% block contenido %}
+<body>
+    <div><h1 style="background-color: rgba(0, 128, 0, 0.589)"> {{mensaje}} </h1></div>
 
-<div>
-    <br>
-    <form action="/app_coder/buscar/" method="get">
-        
-        <input type="number" name="camada" id="camada" placeholder="Numero de la camada">
-        <input type="submit" value="Buscar curso">
+    <div>
+        <br>
+        <form action="/app_coder/buscar/" method="get">
+            
+            <input type="number" name="camada" id="camada" placeholder="Numero de la camada">
+            <input type="submit" value="Buscar curso">
 
-    </form>
-    <br>
-</div>
+        </form>
+        <br>
+    </div>
+    
+    <div>
+        <br>
+        <button><a href=" {% url 'logout' %} ">Cerrar sesión</a></button>
+    </div>
 
-<div>
-{% if cursos %}
- <p>Estamos buscando el: {{camada}}</p>
- <ul>
-    {% for curso in cursos %}
-    <li>Nombre del curso: {{curso.nombre}}</li>
-    <li>Camada: {{curso.camada}}</li>
-    <br>
-    {% endfor %}
- </ul>
-{% endif %}
-</div>
+    <div>
+        {% if cursos %}
+        <p>Estamos buscando el: {{camada}}</p>
+        <ul>
+            {% for curso in cursos %}
+            <li>Nombre del curso: {{curso.nombre}}</li>
+            <li>Camada: {{curso.camada}}</li>
+            <br>
+            {% endfor %}
+        </ul>
+        {% endif %}
+    </div>
+</body>
 {% endblock %}

@@ -1,0 +1,18 @@
+{% extends "app_coder/index.html" %}
+
+{% load static %}
+
+{% block contenido %}
+
+<body>
+    <div>
+        <form action="" method="POST">
+            {% csrf_token %}
+            {{form.as_p}}
+            <button type="submit">Iniciar Sesion</button>
+            <button><a href="register">Si no tiene usuario, registrese</a></button>
+        </form>
+    </div>
+</body>
+
+{% endblock %}

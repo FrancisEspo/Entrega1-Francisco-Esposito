@@ -1,0 +1,20 @@
+{% extends "app_coder/index.html" %}
+
+{% load static %}
+
+{% block contenido %}
+<body>
+    <div>
+        <form method="POST">
+            {% csrf_token %}
+            <table>
+                {{form.as_table}}
+            </table>
+            
+            <button type="submit">Registrate maestro</button>
+            <button><a href="login">Ya tiene una cuenta? Inicie sesión</a></button>
+        </form>
+    </div>
+</body>
+
+{% endblock %}

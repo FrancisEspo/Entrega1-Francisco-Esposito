@@ -1,18 +1,21 @@
-from audioop import reverse
-from distutils.log import info
 from re import template
-from django.shortcuts import render, HttpResponse
-from django.http import HttpResponse
+from django.shortcuts import render
 from django.urls import reverse_lazy
 
-from django.views.generic import ListView, DeleteView, DetailView, CreateView, UpdateView
+from django.views.generic import ListView, DeleteView, DetailView, UpdateView
 
 from app_coder.models import Curso, Estudiante, Profesor
 
-from .forms import curso_formulario, profesor_formulario, estudiante_formulario
+from .forms import curso_formulario, profesor_formulario, estudiante_formulario, UserRegisterForm
+
+from django.contrib.auth.forms import AuthenticationForm
+from django.contrib.auth import login, authenticate
+
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 
+@login_required
 def inicio(request):
     return render(request, 'app_coder/inicio.html')
 
@@ -31,8 +34,46 @@ def buscar(request):
     
     return render(request, 'app_coder/inicio.html', {'respuesta':respuesta})
 
+def login_request(request):
+    if request.method == 'POST':
+        form = AuthenticationForm(request, data = request.POST)
+
+        if form.is_valid():
+            usuario = form.cleaned_data.get('username')
+            contrasenna = form.cleaned_data.get('password')
+
+            user = authenticate(username=usuario, password=contrasenna)
+
+            if user is not None:
+                login(request, user)
+                return render(request, 'app_coder/inicio.html', {'mensaje':f'Bienvenid@ {usuario}'} )
+            else:
+                return render(request, 'app_coder/inicio.html', {'mensaje':f'Error! Datos incorrectos'} )
+            
+        else:
+            return render(request, 'app_coder/inicio.html', {'mensaje':f'Error! Formulario erroneo'} )
+    
+    form = AuthenticationForm()
+
+    return render(request, 'app_coder/login.html', {'form':form} )
+
+def register(request):
+    if request.method == 'POST':
+        form = UserRegisterForm(request.POST)
+
+        if form.is_valid():
+            username = form.cleaned_data['username']
+            form.save()
+            return render(request, 'app_coder/inicio.html', {'mensaje':'Usuario creado :)'} )
+
+    else:
+        form = UserRegisterForm()
+
+    return render(request, 'app_coder/register.html', {'form':form})
+
 #Creadores de registros
 
+@login_required
 def curso(request):
     if request.method == 'POST':
 
@@ -55,6 +96,7 @@ def curso(request):
 
     return render(request, "app_coder/cursos.html", {"mi_formulario": mi_formulario})
 
+@login_required
 def estudiante(request):
     if request.method == 'POST':
 
@@ -78,6 +120,7 @@ def estudiante(request):
 
     return render(request, "app_coder/estudiantes.html", {"mi_formulario": mi_formulario})
 
+@login_required
 def profesor(request):
     if request.method == 'POST':
 
